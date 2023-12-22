@@ -6,3 +6,14 @@ operation = (input("""What type of equation are we going for?
 if operation == "+":
     result = fst_number + scnd_number
     print(f"{fst_number} + {scnd_number} is  = {result}")
+elif operation == "-":
+    result = fst_number - scnd_number
+    print(f"{fst_number} - {scnd_number} is = {result}")
+elif operation == "*":
+    result = fst_number * scnd_number
+    print(f"{fst_number} * {scnd_number} is = {result}")
+elif operation == "/":
+    result = fst_number // scnd_number
+    print(f"{fst_number} / {scnd_number} is = {result}")
+else:
+    print("Something went wrong, please try again!")
