@@ -1,17 +1,3 @@
-""" Komandinio darbo / savarankiška užduotis
-===[ Biudžetas ]===
-
-Reikalavimai
-
-* Biudžeto turinys - pajamų/išlaidų žurnalo žodynas
-** raktas - paskirtis
-** reikšmė - pajamos pozityvus float, išlaidos negatyvus float
-* Galimybė pridėti pajamas arba išlaidas
-* Spausdinti pajamų/išlaidų žurnalą
-* Suskaičiuoti biudžeto balansą
-
-"""
-
 def add_income(budget: dict, purpose: str, amount: float) -> None:
     if 'income' not in budget:
         budget['income'] = []
@@ -42,7 +28,8 @@ def calculate_balance(budget: dict) -> float:
     total_expenses = sum(expense['amount'] for expense in budget.get('expenses', []))
     return total_income + total_expenses
 
-def main(budget: dict) -> None:
+def main() -> None:
+    budget = {}
     while True:
         print("===[ Biudžetas ]===")
         print("1: Pridėti pajamas")
@@ -70,3 +57,6 @@ def main(budget: dict) -> None:
             print(f"Biudžeto balansas: {balance}")
         else:
             print("Klaida: Netinkamas pasirinkimas!")
+
+if __name__ == "__main__":
+    main()
