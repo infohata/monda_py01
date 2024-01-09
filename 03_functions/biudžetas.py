@@ -58,5 +58,5 @@ def main() -> None:
         else:
             print("Klaida: Netinkamas pasirinkimas!")
 
-if __name__ == "__main__":
-    main()
+main()
+

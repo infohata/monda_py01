@@ -70,3 +70,4 @@ def main(budget: dict) -> None:
             print(f"Biudžeto balansas: {balance}")
         else:
             print("Klaida: Netinkamas pasirinkimas!")
+main([])
