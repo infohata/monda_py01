@@ -1,0 +1,2 @@
+user_name = c:/Users/visoc/CodeAcademy/monda_py01/venv/Scripts/python.exe c:/Users/visoc/Downloads/classy_fridge.py
+pin_code = 1234

@@ -1,0 +1,80 @@
+{
+    "proteins": [
+        [
+            "chicken",
+            2
+        ],
+        [
+            "beef",
+            3
+        ],
+        [
+            "tofu",
+            4
+        ],
+        [
+            "eggs",
+            30
+        ]
+    ],
+    "dairy": [
+        [
+            "milk",
+            1
+        ],
+        [
+            "cheese",
+            2
+        ],
+        [
+            "yogurt",
+            3
+        ],
+        [
+            "butter",
+            2
+        ]
+    ],
+    "starch": [
+        [
+            "rice",
+            2
+        ],
+        [
+            "pasta",
+            3
+        ],
+        [
+            "potato",
+            4
+        ]
+    ],
+    "fruits/vegetables": [
+        [
+            "apple",
+            5
+        ],
+        [
+            "broccoli",
+            2
+        ],
+        [
+            "banana",
+            3
+        ]
+    ],
+    "fats": [
+        [
+            "avocado",
+            2
+        ],
+        [
+            "olive oil",
+            3
+        ],
+        [
+            "nuts",
+            4
+        ]
+    ]
+}
