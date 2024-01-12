@@ -1,5 +1,5 @@
 class Product:
-    def __init__(self, name:str, quantity:float, unit_of_measurement = 'Iveskite mato vieneta!', **kwargs):
+    def __init__(self, name:str, quantity:float, unit_of_measurement = '', **kwargs):
         self.name = name
         self.quantity = quantity
         self.unit_of_measurement = unit_of_measurement # options: kg, g, L, ml
@@ -28,11 +28,12 @@ class Recipe:
 
 
 class Fridge:
-    contents = []
+    def __init__(self):
+        self.contents = []
 
     def check_product(self, product_name:str) -> (int, Product):
         for product_id, product in enumerate(self.contents):
-            if product.name == product_name:
+            if product.name.lower() == product_name.lower():
                 return product_id, product
         return None, None
     
@@ -40,22 +41,24 @@ class Fridge:
         return product.quantity - quantity
 
     def add_product(self, name:str, quantity:float, unit_of_measurement:str):
-        valid_units = ['kg', 'g', 'L', 'ml', 'vnt']
+        valid_units = ['kg', 'g', 'l', 'ml', 'vnt']
         if unit_of_measurement not in valid_units:
-            print("Netinkamas vienetas! Galimi vienetai: kg, g, L, ml, vnt")
+            print("Netinkamas vienetas! Galimi vienetai: kg, g, l, ml, vnt")
             return
+        else:
+            print('Iveskite tesinga pasirinkima')
         product_id, product = self.check_product(name) # nenaudojamus kintamuosius galima vadinti tiesiog _
         if product is not None:
             product.quantity += quantity
         else:
             self.contents.append(Product(name, quantity, unit_of_measurement))
 
-    def remove_product(self, name:str, quantity:float): # metodas(funkcija) kuris issima produkta ir kieki
+    def remove_product(self, name:str, quantity:float): 
         product_id, product = self.check_product(name) # nenaudojamus kintamuosius galima vadinti tiesiog _
-        if product: # tai jeigu produktas:
-            if product.quantity >= quantity: # if funkcija patikrina ar yra pakankamas produkto kiekis, kad ji is viso galetume isimti is saldytuvo
+        if product:
+            if product.quantity >= quantity:
                 product.quantity -= quantity
-                 # si funkcija atima produkta is saldytuvo 
+   
             else:
                 print(f'Nepakankamas kiekis {product.name} saldytuve yra {product.quantity}')
         else:
@@ -81,13 +84,18 @@ class Fridge:
         missing_ingredients = []
         for ingredient in recipe.ingredients:
             _, product = self.check_product(ingredient.name)
-            if not product or product.quantity < ingredient.quantity:
-                missing_ingredients.append(ingredient.name)
-        if missing_ingredients:
-            print(f"Trūksta šių produktų: {','.join(missing_ingredients)} truksta kiekio {ingredient.quantity}")
+            if product is not None:
+                missing_quantity = product.quantity - ingredient.quantity
+                if missing_quantity < 0:
+                    missing_ingredients.append(Product(ingredient.name, abs(missing_quantity)))
+            else:
+                missing_ingredients.append(ingredient)
+        if len(missing_ingredients) == 0:
+            print('Jus turite reikiamus produktus')
         else:
-            print("Receptas įgyvendinamas su turimais produktais.")
-
+            print(f'Jums truksta siu produktu: {missing_ingredients}')
+            
+#Jums truksta siu produktu: [(duona, 5.0: ), (agurkas, 10.0: ), (pomidoras, 9.0: )] neveikia atitinkamai patikrinimas recepto kazkur reikia uzbaigti recepto tikrinima, nes blogai isspausdina
 def main():
     fridge = Fridge()
     
@@ -108,8 +116,10 @@ def main():
             product_name = input("Kokį produktą norite pridėti?: ")
             product_quantity = float(input("Kokį kiekį norite pridėti?: "))
             unit_of_measurement = input('Koks tai yra matavimo vienetas? (options: kg, g, l, ml)')
-            if unit_of_measurement == '':
-                print('Neivestas matavimo vienetas')
+            valid_units = ['kg', 'g', 'l', 'ml', 'vnt']
+            if unit_of_measurement not in valid_units:
+                print('Iveskite teisinga matavimo vieneta! Pvz: kg, g, l, ml, vnt')
+                continue
             fridge.add_product(product_name, product_quantity, unit_of_measurement)
             print(f'Sekmingai ideta {product_name} {product_quantity}: {unit_of_measurement}.')
         elif choice == "3":
